@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "688ec69e-73c2-4a8b-98ff-7197ff36d2de",
+		"name": "Lista API (Animals list)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39816030"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "Localiza um Cachorro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Dog\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}event.json?search=animal.species:\"Dog\"&limit=5",
+							"host": [
+								"{{URL}}event",
+								"json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "animal.species:\"Dog\""
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Localiza animal masculino",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains only Male animals\", function () {\r",
+									"    const response = pm.response.json(); \r",
+									"\r",
+									"    let males = response.results.filter(item => \r",
+									"        item.animal && item.animal.gender === \"Male\"\r",
+									"    );\r",
+									"\r",
+									"    pm.expect(males.length).to.be.greaterThan(0); \r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}event.json?search=animal.gender:\"Male\"&limit=5",
+							"host": [
+								"{{URL}}event",
+								"json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "animal.gender:\"Male\""
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Localiza animal feminino",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains only Male animals\", function () {\r",
+									"    const response = pm.response.json(); \r",
+									"\r",
+									"    let females = response.results.filter(item => \r",
+									"        item.animal && item.animal.gender === \"Female\"\r",
+									"    );\r",
+									"\r",
+									"    pm.expect(females.length).to.be.greaterThan(0); \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}event.json?search=animal.gender:\"Female\"&limit=5",
+							"host": [
+								"{{URL}}event",
+								"json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "animal.gender:\"Female\""
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Localiza animal préviamente saudável",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response contains animals with good health prior to exposure\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    let healthy = response.results.filter(item => item.health_assessment_prior_to_exposure.condition === \"Good\");\r",
+									"    pm.expect(healthy.length).to.be.greaterThan(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}event.json?search=health_assessment_prior_to_exposure.condition:\"Good\"&limit=5",
+							"host": [
+								"{{URL}}event",
+								"json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "health_assessment_prior_to_exposure.condition:\"Good\""
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Localiza animal com mais de 150 anos para falhar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}event.json?search=animal.age.min:150.00+AND+animal.age.unit:\"Year\"&limit=5",
+							"host": [
+								"{{URL}}event",
+								"json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "animal.age.min:150.00+AND+animal.age.unit:\"Year\""
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Localiza 5 shitzus para falhar(Com erro de digitação)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}event.json?search=animal.breed.breed_component:\"Shizu\"&limit=5",
+							"host": [
+								"{{URL}}event",
+								"json"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "animal.breed.breed_component:\"Shizu\""
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
